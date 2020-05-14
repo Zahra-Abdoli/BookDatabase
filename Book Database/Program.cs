@@ -16,18 +16,18 @@ namespace Book_Database
                 switch (Console.ReadLine().ToLower())
                 {
                     case "add":
-                       bool valid= Add(index, book);
+                        bool valid = Add(index, book);
                         if (valid) index++;
                         break;
                     case "delete":
-                       bool delete= Delete(book,index);
+                        bool delete = Delete(book, index);
                         if (delete) index--;
                         break;
                     case "display":
-                        display(book,index);
+                        display(book, index);
                         break;
                     case "search":
-                        search(book,index);
+                        search(book, index);
                         break;
                     case "exit":
                         break;
@@ -47,49 +47,49 @@ namespace Book_Database
             {
                 Console.WriteLine("title :");
                 string title = Console.ReadLine();
-                if (title == null) { Console.WriteLine("please inter valid title"); continue; }
+                if (string.IsNullOrEmpty(title)) { Console.WriteLine("please inter valid title"); continue; }
                 Console.WriteLine("Author :");
                 string author = Console.ReadLine();
-                if (author == null) { Console.WriteLine("please inter valid author"); continue; }
+                if (string.IsNullOrEmpty(author)) { Console.WriteLine("please inter valid author"); continue; }
                 books Newbook = new books(title, author);
                 book[Index] = Newbook;
-                Console.WriteLine($"{Newbook.title}is added");
+                Console.WriteLine($"{Newbook.title} is added");
                 return true;
             }
         }
 
 
-        static bool Delete(books[] book,int index)
+        static bool Delete(books[] book, int index)
         {
             while (true)
             {
                 Console.WriteLine("title  you want to be delete:");
                 string item1 = Console.ReadLine();
-                if (item1 is null)
+                if (string.IsNullOrEmpty(item1))
                 {
                     Console.WriteLine("please add valid name");
                     continue;
 
                 }
 
-                int Index1= 0;
-                foreach (books item in book)
+                int Index1 = 0;
+                for (int i = 0; i < index; i++)
                 {
-                    string item2 = item.title;
+                    string item2 = book[i].title;
                     if (item2 == item1)
                     {
                         if (Index1 == book.Length)
                         {
                             book[Index1] = null;
                         }
-                        for (int i = Index1; i < index; i++)
+                        for (int j = Index1; j < index; j++)
                         {
-                            book[i] = book[i + 1];
+                            book[j] = book[j + 1];
                         }
                         Console.WriteLine($"{item1} is deleted ");
                         return true;
                     }
-                    else { }
+                    
                     Index1++;
 
                 }
@@ -99,7 +99,8 @@ namespace Book_Database
             }
 
         }
-        static void display(books[] book,int index)
+
+        static void display(books[] book, int index)
         {
             foreach (books item in book)
             {
@@ -112,7 +113,7 @@ namespace Book_Database
             //CloseMainWindows
 
         }
-        static void search(books[] book,int index)
+        static void search(books[] book, int index)
 
         {
             while (true)
@@ -120,16 +121,21 @@ namespace Book_Database
                 Console.WriteLine("title :");
                 string item1 = Console.ReadLine();
 
-                if (item1 == null)
-                { Console.WriteLine("add valid title"); continue; }
-                for (int i = 0; i <index;i++) {
+                if (string.IsNullOrEmpty(item1))
+                { Console.WriteLine("enter valid title"); continue; }
+                for (int i = 0; i < index; i++)
+                {
 
                     string item2 = book[i].title;
                     if (item2 == item1)
-                        Console.WriteLine(book[i].title, book[i].author);
-                
+                    {
+                        Console.WriteLine($"title:{book[i].title}   author:{book[i].author}");
+                        return;
+                    }
                 }
-                
+                Console.WriteLine("there is no book with this title");
+                return;
+                ;
             }
 
 
