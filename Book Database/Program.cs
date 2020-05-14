@@ -47,12 +47,13 @@ namespace Book_Database
             {
                 Console.WriteLine("title :");
                 string title = Console.ReadLine();
-                if (title == null) { Console.WriteLine("please inter valid title");  continue; }
+                if (title == null) { Console.WriteLine("please inter valid title"); continue; }
                 Console.WriteLine("Author :");
                 string author = Console.ReadLine();
                 if (author == null) { Console.WriteLine("please inter valid author"); continue; }
                 books Newbook = new books(title, author);
                 book[Index] = Newbook;
+                Console.WriteLine($"{Newbook.title}is added");
                 return true;
             }
         }
@@ -85,6 +86,7 @@ namespace Book_Database
                         {
                             book[i] = book[i + 1];
                         }
+                        Console.WriteLine($"{item1} is deleted ");
                         return true;
                     }
                     else { }
