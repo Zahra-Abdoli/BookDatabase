@@ -30,6 +30,7 @@ namespace Book_Database
                         search(book, index);
                         break;
                     case "exit":
+                        exit();
                         break;
                 }
 
@@ -110,7 +111,7 @@ namespace Book_Database
         }
         static void exit()
         {
-            //CloseMainWindows
+            Environment.Exit(0);
 
         }
         static void search(books[] book, int index)
